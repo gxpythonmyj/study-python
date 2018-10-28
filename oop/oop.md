@@ -54,7 +54,7 @@
         －　类所有的成员
                     
                     #dict前后各有两个下划线
-                    class_name._dict_
+                    class_name.__dict__
                     
                
   # 3. anaconda基本使用
@@ -63,4 +63,9 @@
   －conda list:显示anaconda安装的包
   －conda env list:显示anaconda的虚拟环境列表　
   －conda create -n xxx python-3.6:创建python版本为3.6的
-    
+  
+  #类和对象的成员分析
+  －类和对象都可以存储成员，成员可以归类所有，也可以归对象所有
+  －类存储成员时使用的是与类关联的一个对象
+  －独享存储成员是存储在当前对象中
+  －对象访问一个成员时，如果对象中没有该成员,尝试访问类中的同名成员，如果对象中有此成员，一定使用对象中的成员
