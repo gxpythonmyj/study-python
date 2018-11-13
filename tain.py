@@ -1,9 +1,9 @@
 #9月17日尝试
 #没有第一句代码报错pd没有定义
 import pandas as pd
-train_url ="g:\\train\\train.csv"
+train_url ="d:\\train\\train.csv"
 train = pd.read_csv(train_url)#括号内容多了个双引号即："train_url"报错FileNotFoundError: File b'train_url' does not exist找不到文件……
-test ="g:\\test\\test.csv"
+test ="d:\\test\\test.csv"
 train["Pclass"].value_counts()
 #了解并打印各个舱位都有多少乘客
 print(train["Pclass"].value_counts())
