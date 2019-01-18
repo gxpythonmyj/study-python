@@ -1,3 +1,55 @@
+#1、出现游戏一开始就game over的问题
+#问题出在check_game_over函数中条件有误。
+#2、出现游戏一开始就闪关不出界面问题
+#问题出在if __name__ == "__main__":中“__main后没有双下划线
+#按键名称key中的首字母不用大写报错如：'<key-Up>'
+#3、报错
+# Traceback (most recent call last):
+# File "D:/PLRR/study-python/tkiner贪吃蛇.py", line 166, in <module>
+#main()
+# File "D:/PLRR/study-python/tkiner贪吃蛇.py", line 156, in main
+#  world = WORLD(q)
+#TypeError: __init__() takes 1 positional argument but 2 were given
+#原因是class WORLD(Tk):
+#    def __init__(self, queue):中括号里缺少了一个参数queue
+#4、有游戏界面有食物没有蛇；报错：
+#Exception in thread Thread-1:
+#Traceback (most recent call last):
+#  File "C:\Anaconda3\lib\threading.py", line 916, in _bootstrap_inner
+#   self.run()
+# File "D:/PLRR/study-python/tkiner贪吃蛇.py", line 103, in run
+#  self.queue.put({'move': self.snake_points})
+#AttributeError: 'Snake' object has no attribute 'snake_points'
+#原因是：class Snake(threading.Thread):中
+# self.snake_points = [(495, 55), (485, 55), (465, 55), (455, 55)]中points少了字母s
+#5、游戏界面有蛇有食物，但蛇不动 报错：
+#Exception in thread Thread-1:
+#Traceback (most recent call last):
+#  File "C:\Anaconda3\lib\threading.py", line 916, in _bootstrap_inner
+#    self.run()
+#  File "D:/PLRR/study-python/tkiner贪吃蛇.py", line 106, in run
+#    self.move()
+#  File "D:/PLRR/study-python/tkiner贪吃蛇.py", line 115, in move
+#    if self.food.postion == new_snake_point:
+#AttributeError: 'Food' object has no attribute 'postion'
+#class Food():中def new_food(self):中的
+#self.positon = x, y  # 存放食物的位置postion打错了
+#增加重玩按钮时点“重玩”报错：
+#Exception in Tkinter callback
+#Traceback (most recent call last):
+#  File "C:\Anaconda3\lib\tkinter\__init__.py", line 1699, in __call__
+#    return self.func(*args)
+#TypeError: __init__() missing 1 required positional argument: 'queue'
+
+# #经验总结：
+#1、练习敲代码直接在pycharm上撸；可以利用TAB键和pycharm录入内容记忆功能避免单词打错的问题。
+#下一版需要解决 能实现“再玩一次”按钮功能   即解决如下报错：
+#Exception in Tkinter callback
+#Traceback (most recent call last):
+#  File "C:\Anaconda3\lib\tkinter\__init__.py", line 1699, in __call__
+#    return self.func(*args)
+#TypeError: __init__() missing 1 required positional argument: 'queue'
+#背景资料：args表示任何多个无名参数，它是一个tuple
 import queue
 import time
 from tkinter import *
@@ -61,7 +113,6 @@ class World(Tk):
          self.canvas.create_text(300, 150, fill='white', text='Begin')
          self.canvas.create_window(200, 180, anchor='nw', window = quitbtn)
          self.canvas.create_window(300, 180, anchor='nw', window = rebtn)
-
 
 class Food():
     def __init__(self, queue):
